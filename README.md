@@ -14,10 +14,10 @@ Airbnb does not provide a public review/reply API for ordinary accounts, so live
 Before starting, install:
 
 1. **Node.js**
-   Download the LTS version from `https://nodejs.org`.
+   This lets your computer run the app. Download the **LTS** version from `https://nodejs.org`.
 
 2. **An OpenAI API key**
-   Create one from your OpenAI account dashboard. The app uses this key to write reply suggestions.
+   This lets the app write reply suggestions. A normal ChatGPT login is not always the same as API access, so follow the API key steps below.
 
 3. **Optional Airbnb/PMS API credentials**
    Only needed if you want to load and post real reviews. Without these, the app uses demo reviews.
@@ -26,15 +26,16 @@ Before starting, install:
 
 ### 1. Open the Project Folder
 
-Open a terminal in this folder:
+If you downloaded the project from GitHub, open Terminal and run:
 
 ```sh
-/Users/chuck/Desktop/randon_app
+git clone https://github.com/tthuc396/airbnb-ai-review.git
+cd airbnb-ai-review
 ```
 
-On Mac, you can open Terminal, type `cd ` with a space after it, drag the project folder into the Terminal window, then press Enter.
+If you already have the project folder on your computer, open Terminal, type `cd ` with a space after it, drag the project folder into the Terminal window, then press Enter.
 
-### 2. Check Node.js
+### 2. Check That Node.js Works
 
 Run:
 
@@ -46,7 +47,25 @@ If you see a version like `v18`, `v20`, or newer, you are ready.
 
 If you see an error, install Node.js from `https://nodejs.org`, then close and reopen Terminal.
 
-### 3. Create Your Settings File
+### 3. Get Your OpenAI API Key
+
+The app needs an OpenAI API key before it can generate replies.
+
+1. Go to `https://platform.openai.com`.
+2. Sign in or create an account.
+3. Open the API keys page. You can usually find it from the dashboard under **API keys**.
+4. Click **Create new secret key**.
+5. Give it a simple name, like `Airbnb Review Reply Desk`.
+6. Copy the key when it appears.
+
+Important:
+
+- The key usually starts with `sk-`.
+- You may only see it once, so copy it before closing the page.
+- Keep it private. Do not paste it into GitHub, email, or public chat.
+- If OpenAI asks you to add billing, follow their billing setup. The app cannot generate replies unless the API key is active.
+
+### 4. Create Your Settings File
 
 Copy the example settings file:
 
@@ -55,6 +74,12 @@ cp .env.example .env
 ```
 
 Open `.env` in a text editor.
+
+On Mac, you can usually open it with:
+
+```sh
+open -e .env
+```
 
 Find this line:
 
@@ -71,6 +96,18 @@ OPENAI_API_KEY=sk-your-real-key
 ```
 
 Save the file.
+
+Your `.env` file should look similar to this:
+
+```txt
+OPENAI_API_KEY=sk-your-real-key
+OPENAI_BASE_URL=https://api.openai.com
+OPENAI_MODEL=gpt-5.2
+OPENAI_TIMEOUT_MS=30000
+PORT=5173
+```
+
+Leave the other settings alone unless you have live Airbnb/PMS API credentials.
 
 ## Run the App
 
@@ -93,6 +130,12 @@ http://localhost:5173
 ```
 
 Keep the Terminal window open while using the app. If you close it, the app stops.
+
+To stop the app later, click the Terminal window and press:
+
+```txt
+Control + C
+```
 
 ## How to Use It
 
