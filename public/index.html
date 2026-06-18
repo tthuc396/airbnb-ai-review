@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Airbnb Review Reply Desk</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="workspace" aria-labelledby="page-title">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Host reply desk</p>
+            <h1 id="page-title">Airbnb Review Replies</h1>
+          </div>
+          <div class="topbar-actions">
+            <div class="status-pill" id="connectionStatus" role="status" aria-live="polite">
+              Checking...
+            </div>
+            <button
+              class="ghost-button"
+              type="button"
+              id="loadReviewsButton"
+              aria-controls="reviewList"
+            >
+              Load reviews
+            </button>
+          </div>
+        </header>
+
+        <div class="inbox-grid">
+          <aside class="reviews-panel" aria-labelledby="reviewsTitle">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Reviews</p>
+                <h2 id="reviewsTitle">Needs reply</h2>
+              </div>
+              <span class="count-pill" id="reviewCount">0</span>
+            </div>
+
+            <div id="reviewList" class="review-list" aria-label="Loaded reviews"></div>
+            <div id="reviewsEmpty" class="empty-state">
+              Load reviews to see guest feedback and prepare a reply.
+            </div>
+          </aside>
+
+          <section class="reply-panel" aria-labelledby="replyTitle">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Suggested reply</p>
+                <h2 id="replyTitle">Choose a version, then post</h2>
+              </div>
+              <button
+                class="primary-button"
+                type="button"
+                id="suggestButton"
+                aria-controls="replyOptions replyEditor"
+                disabled
+              >
+                Generate versions
+              </button>
+            </div>
+
+            <div id="selectedReview" class="selected-review" aria-live="polite">
+              Select a review to generate warm, appreciative reply options.
+            </div>
+
+            <div id="errorState" class="error-state hidden" role="alert"></div>
+            <div id="successState" class="success-state hidden" role="status"></div>
+
+            <div
+              id="replyOptions"
+              class="reply-options hidden"
+              role="radiogroup"
+              aria-label="Reply versions"
+            ></div>
+
+            <label class="editor-label" for="replyEditor">
+              Selected reply
+              <textarea
+                id="replyEditor"
+                rows="6"
+                placeholder="Generate reply versions, then choose one to edit before posting."
+              ></textarea>
+            </label>
+
+            <div class="actions">
+              <button class="primary-button" type="button" id="postButton" disabled>
+                Post reply
+              </button>
+              <button class="ghost-button" type="button" id="copyButton" disabled>Copy</button>
+            </div>
+
+            <div id="notes" class="notes hidden"></div>
+            <div id="copyStatus" class="sr-only" aria-live="polite"></div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <template id="reviewTemplate">
+      <button class="review-item" type="button" aria-pressed="false">
+        <span class="review-topline">
+          <strong class="review-guest"></strong>
+          <span class="review-rating"></span>
+        </span>
+        <span class="review-property"></span>
+        <span class="review-excerpt"></span>
+        <span class="review-status"></span>
+      </button>
+    </template>
+
+    <template id="optionTemplate">
+      <article class="reply-option">
+        <div class="draft-topline">
+          <label class="option-label">
+            <input type="radio" name="replyVersion" />
+            <span class="option-name"></span>
+          </label>
+          <button class="copy-version-button" type="button">Copy</button>
+        </div>
+        <p class="draft-text"></p>
+      </article>
+    </template>
+
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>
